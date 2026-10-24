@@ -1,52 +1,52 @@
-# Geospatial Map Quiz & Automated ETL Data Pipeline 🗺️
+# Middle East Map Quiz
 
-A high-performance geospatial data application developed in Python utilizing `pandas` for data manipulation and `turtle` for vector-based spatial rendering. The application ingests geographic datasets, validates user query inputs via normalized lookups, dynamically renders vector pins, and executes an automated ETL routine upon session exit to persist missed entries into a structured CSV data store.
+An interactive map quiz built in Python with `turtle` for drawing and `pandas` for working with CSV data. The player types country names, and every correct answer is marked on the map. When the player types `Exit`, the countries they missed are saved to a CSV file so they can study them later.
 
 ---
 
-## 🛠️ Tech Stack & Technical Architecture
+## Tech Stack
 
 * **Language:** Python 3.x
-* **Data Processing & ETL:** Pandas (CSV ingestion, dataset normalization, relational filtering, vector indexing, automated data persistence)
-* **Geospatial Engine & GUI:** Turtle Graphics (Custom coordinate systems, vector graphics rendering, dynamic canvas drawing)
-* **Core Engineering Principles:** ETL Pipelines, Data Integrity, Case-Insensitive String Normalization, State Persistence, Memory-Efficient Data Processing
+* **Data Handling:** Pandas (reading CSV, filtering rows, saving a new CSV)
+* **Graphics:** Turtle Graphics (map background, red markers, country labels)
 
 ---
 
-## 🏗️ Project Architecture
+## Project Architecture
 
-* **main.py** — Core engine handling spatial queries, event loop management, and coordinate lookups
-* **coordinates.csv** — Primary relational dataset mapping geographic entities to 2D spatial coordinates (x, y)
-* **countries_to_learn.csv** — Dynamically generated output pipeline isolating unguessed spatial entities upon process termination
-* **map.gif** — High-resolution base GIS visual map asset
+* **main.py** — Game loop: reads the answer, checks it, draws the marker, and saves missed countries on exit
+* **coordinates.csv** — 21 countries with their (x, y) position on the map
+* **countries_to_learn.csv** — Created when the player types `Exit`; lists the countries that were not guessed
+* **map.gif** — Background map image
 * **README.md** — Project documentation
 
 ---
 
-## 🎮 System Workflow & Operations
+## How It Works
 
-* **Input Processing:** Ingests user input via an interactive dialog and normalizes text strings via `.title()` formatting to match primary dataset keys.
-* **Spatial Rendering:** Performs rapid lookup in `coordinates.csv` and dynamically plots vector markers with text labels at calculated screen coordinates.
-* **Automated Data Persistence:** Triggers an automated extraction script upon inputting `Exit`, computing set differences via list comprehensions, and exporting unvisited locations into `countries_to_learn.csv`.
-
----
-
-## 🌟 Engineering Highlights
-
-* **Automated ETL Pipeline:** Seamlessly handles the lifecycle of spatial data — from reading raw CSV files to exporting refined target data upon user exit.
-* **Real-Time Vector Mapping:** Converts tabular coordinate data into live vector rendering without latency.
-* **Robust Error & Case Normalization:** Eliminates user input discrepancies by standardizing incoming strings before querying the underlying DataFrame.
-* **State Management & Live Metrics:** Continuously computes score metrics and dynamically updates UI state in real-time.
+* **Input:** The player types a country name; the text is cleaned with `.strip().title()` so `egypt` and `Egypt` both work.
+* **Checking:** If the country is in `coordinates.csv` and wasn't guessed before, it is added to the guessed list.
+* **Drawing:** The country's x and y are looked up with Pandas filtering, then a red circle and the name are drawn on the map.
+* **Score:** The window title shows the progress, e.g. `5/21 Countries Correct`.
+* **Saving:** Typing `Exit` (or pressing Cancel) builds the missing list with a list comprehension and saves it with `DataFrame.to_csv()`.
 
 ---
 
-## 🚀 Installation & Execution
+## Key Features
+
+* **CSV → Map:** Turns a table of coordinates into markers on a map.
+* **No Duplicate Points:** Guessing the same country twice doesn't add to the score.
+* **Study List:** Missed countries are exported to `countries_to_learn.csv`.
+
+---
+
+## Installation & Execution
 
 1. **Clone the repository:**
-   `git clone https://github.com/nepal-aly/middle-east-map-quiz.git`
+   `git clone https://github.com/nepal-aly/middle-east-map-game.git`
 
 2. **Navigate to the directory:**
-   `cd middle-east-map-quiz`
+   `cd middle-east-map-game`
 
 3. **Install required dependencies:**
    `pip install pandas`
