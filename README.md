@@ -45,7 +45,7 @@ An interactive map quiz built in Python with `turtle` for drawing and `pandas` f
 ## Installation & Execution
 
 1. **Clone the repository:**
-   `git clone https://github.com/Nepal-Ali/middle-east-map-game.git`
+   `git clone https://github.com/nepal-aly/middle-east-map-game.git`
 
 2. **Navigate to the directory:**
    `cd middle-east-map-game`
