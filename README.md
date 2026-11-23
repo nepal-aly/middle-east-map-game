@@ -2,6 +2,8 @@
 
 An interactive map quiz built in Python with `turtle` for drawing and `pandas` for working with CSV data. The player types country names, and every correct answer is marked on the map. When the player types `Exit`, the countries they missed are saved to a CSV file so they can study them later.
 
+![Middle East map quiz screenshot](images/middle-east-map-game.png)
+
 ---
 
 ## Tech Stack
